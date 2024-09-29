@@ -1,4 +1,4 @@
-extends Node
+class_name AceArrayUtil extends Node
 
 ## Find First Element of Array that me
 static func findFirst( arr:Array, search_criteria: Callable) -> Variant: 
