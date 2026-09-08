@@ -116,7 +116,7 @@ class File:
 					
 					if dir.current_is_dir():
 						# Recursive call for subdirectories
-						move_folder(editor_interface,old_path, new_path)
+						move_folder(editor_interface, old_path, new_path, ignore_file_ext)
 						# Cleanup: Remove the original source folder once contents are moved
 						_remove_recursive(old_path)
 					else:
@@ -179,8 +179,8 @@ class File:
 	static func _should_ignore_file(file_name: String, ignore_file_ext: Array[String]) -> bool:
 		AceLog.printLog(["Checking if file should be ignored: %s" % file_name], AceLog.LOG_LEVEL.DEBUG)
 		for ignore in ignore_file_ext:
-			if file_name.ends_with(ignore):
-				AceLog.printLog(["Ignoring file: %s due to matching ignore extension: %s" % [file_name, ignore]], AceLog.LOG_LEVEL.DEBUG)
+			if file_name == ignore or file_name.ends_with(ignore):
+				AceLog.printLog(["Ignoring file: %s due to matching ignore pattern: %s" % [file_name, ignore]], AceLog.LOG_LEVEL.DEBUG)
 				return true
 		return false
 	static func _remove_recursive(path: String):
